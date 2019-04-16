@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Muuta tapahtuman tietoja</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+</head>
+<body>
+<div class="text-center">
+	<div th:if="${param.error}">
+		Tapahtuman muokkaaminen epäonnistui.
+	</div>
+	<h5 class="pl-3 pb-3" th:text="'Muuta tapahtuman tietoja'"></h5>
+		<div sec:authorize="hasAuthority('TUOTTAJA')" class="table table-striped">
+				<label class="pl-4" for="status">Status: </label>
+					<a class="btn btn-primary" th:href="@{/julkaisetapahtuma/{id} (id=${tapahtumaId})}">Julkaistu</a>
+					<a class="btn btn-danger" th:href="@{/perutapahtuma/{id} (id=${tapahtumaId})}">Peruttu</a>
+					
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<form th:object="${tapahtuma1}" th:action="@{../tallennavanhatapahtuma}" action="#" method="post">
+					<input type="hidden" th:field="*{tapahtumaId}" class="form-control" />
+					<label class="pl-5" for="tapahtumaNimi">Nimi: </label> <input type="text" id="tapahtumaNimi" th:field="${tapahtuma1.tapahtumaNimi}" />
+					
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<label for="tapahtumaPvm">Päivämäärä: </label> <input type="text" id="tapahtumaPvm" th:field="*{tapahtumaPvm}" />
+					
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<label for="tapahtumaAika">Alkamisaika: </label> <input type="text" th:field="*{tapahtumaAika}" />
+					
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<input class="btn btn-success" type="submit" value="Vahvista"></input>
+				</form>
+			<div class="pt-3">
+				<a th:href="@{/../tapahtumalista}" class="btn btn-primary">Takaisin</a>
+			</div>
+		</div>
+</div>
+	<script>
+	$(document).ready(function(){
+		$("#tapahtumaNimi").focus();
+		
+	    $('#lisaalomake').validate({
+	    	rules: {
+	    		tapahtumaNimi: {
+	    			required: true
+	    		},
+	    		tapahtumaPvm: {
+	    			required: true
+	    		},
+	    		tapahtumaAika: {
+	    			required: true
+	    		}
+	    	},
+	    	messages: {
+	    		tapahtumaNimi: {
+	    			required: "Pakollinen"
+	    		},
+	    		tapahtumaPvm: {
+	    			required: "Pakollinen"
+	    		},
+	    		tapahtumaAika: {
+	    			required: "Pakollinen"
+	    		}
+	    },
+	    submitHandler: function (form) {
+	    	document.forms["lisaalomake"].submit();
+	    	}
+	    });
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<title>Uusi tapahtuma</title>
+</head>
+<body>
+	<div th:if="${param.error}">
+		Tapahtuman luominen epäonnistui.
+	</div>
+	<h5 class="pl-3">Lisää tapahtuman tiedot</h5>
+	<div>
+		<div sec:authorize="hasAuthority('TUOTTAJA')"  class="col-md-3">
+			<form th:object="${tapahtuma}" th:action="@{tallennatapahtuma}" action="#" method="post" id="lisaalomake">
+			  	<label for="tapahtumaNimi">Nimi: </label>
+				<input type="text" id="tapahtumaNimi" th:field="*{tapahtumaNimi}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('tapahtumaNimi')}" th:errors="*{tapahtumaNimi}">Nimen syötössä virhe</span>
+					
+				<div style="clear: both; display: block; height: 10px;"></div>
+			  	<label for="tapahtumaPvm">Päivämäärä (pp.kk.vvv): </label>
+				<input type="text" id="tapahtumaPvm" th:field="*{tapahtumaPvm}" class="form-control"/>
+				
+					<span th:if="${pvmerror} == 1">Päivämääräässä virhe! Syötä muodossa pp.kk.vvv</span>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			  	<label for="tapahtumaAika">Alkamisaika (tt:mm): </label>
+				<input type="text" th:field="*{tapahtumaAika}" class="form-control"/>
+					<span th:if="${aikaerror == 1}">Kellonajassa virhe! Syötä muodossa tt:mm</span>
+					
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<input type="submit" class="btn btn-success" value="Tallenna"></input>
+			</form>
+		<div class="pt-3">
+			<a th:href="@{/../tapahtumalista}" class="btn btn-primary">Takaisin</a>
+		</div>
+		</div>
+	</div>
+	<script>
+	$(document).ready(function(){
+		$("#tapahtumaNimi").focus();
+		
+	    $('#lisaalomake').validate({
+	    	rules: {
+	    		tapahtumaNimi: {
+	    			required: true,
+	    		},
+	    		tapahtumaPvm: {
+	    			required: true
+	    		},
+	    		tapahtumaAika: {
+	    			required: true
+	    		}
+	    	},
+	    	messages: {
+	    		tapahtumaNimi: {
+	    			required: "Pakollinen",
+	    		},
+	    		tapahtumaPvm: {
+	    			required: "Pakollinen"
+	    		},
+	    		tapahtumaAika: {
+	    			required: "Pakollinen"
+	    		}
+	    },
+	    submitHandler: function (form) {
+	    	document.checkValidation();
+	    	document.forms["lisaalomake"].submit();
+	    	}
+	    });
+	});
+</script>
+</body>
+</html>

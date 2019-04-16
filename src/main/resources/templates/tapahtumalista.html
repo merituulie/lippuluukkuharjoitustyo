@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 " />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+
+<title>Tapahtumat</title>
+</head>
+<body>
+	<h5 class="pl-4" th:inline="text">Hei [[${#httpServletRequest.remoteUser}]]!</h5>
+	<div class="header-left pl-4">
+	<a sec:authorize="hasAuthority('ASIAKAS')" th:href="@{../omatliput}" class="btn btn-success">Omat liput</a>
+		<form class="pr-4 text-right" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-danger" />
+		</form>
+		<a href="/login" sec:authorize="isAnonymous()" class="btn btn-success">Kirjaudu</a>
+	</div>
+	<h5 class="text-center">Kaikki tapahtumat</h5>
+	<div class="container-fluid">
+	<table class="table table-striped">
+		<tr>
+			<th>Tapahtuma</th>
+			<th>Päivämäärä</th>
+			<th>Alkaa</th>
+			<th>Status</th>
+			<th>Lippuja</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="tapahtuma : ${tapahtumat}">
+			<td th:text="${tapahtuma.tapahtumaNimi}"></td>
+			<td th:text="${tapahtuma.tapahtumaPvm}"></td>
+			<td th:text="${tapahtuma.tapahtumaAika}"></td>
+			<td th:text="${tapahtuma.status}"></td>
+			<td th:text="${#lists.size(tapahtuma.liput)}"></td>
+			<td sec:authorize="hasAuthority('TUOTTAJA')"><a
+				class="btn btn-success"
+				th:href="@{/muokkaatapahtumaa/{tapahtumaId} (tapahtumaId=${tapahtuma.tapahtumaId})}">Muuta
+					tapahtumaa</a></td>
+			<td sec:authorize="hasAuthority('TUOTTAJA')"><a
+				class="btn btn-success"
+				th:href="@{/lisaalippuja/{tapahtumaId} (tapahtumaId=${tapahtuma.tapahtumaId})}">Lisää
+					lippuja</a></td>
+			<td sec:authorize="hasAuthority('TUOTTAJA')"><a
+				class="btn btn-danger"
+				th:href="@{/poistalippuja/{tapahtumaId} (tapahtumaId=${tapahtuma.tapahtumaId})}">Poista lippuja
+						</a></td>
+			<td sec:authorize="hasAuthority('ASIAKAS')"><a
+				class="btn btn-primary"
+				th:href="@{/varaalippuja/{tapahtumaId} (tapahtumaId=${tapahtuma.tapahtumaId})}">Varaa
+					liput</a>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				class="btn btn-danger"
+				th:href="@{/poistatapahtuma/{tapahtumaId}(tapahtumaId=${tapahtuma.tapahtumaId})}">Poista</a></td>
+			<td></td>
+		</tr>
+	</table>
+	</div>
+	<div class="pl-3">
+	<a sec:authorize="hasAuthority('TUOTTAJA')" class="btn btn-success"
+		href="/lisaatapahtuma">Lisää uusi tapahtuma</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 " />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+
+<title>Omat liput</title>
+</head>
+<body>
+	<h3>Omat lippusi</h3>
+	<div sec:authorize="isAuthenticated()" class="col-md-4"
+		style="padding: 20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-danger" />
+		</form>
+	</div>
+	<div class="container-fluid" style="padding:20px 0">
+	<table class="table table-striped">
+		<tr>
+			<th>Tapahtuma</th>
+			<th>Lipputyyppi</th>
+			<th>Hinta</th>
+			<th></th>
+		</tr> <!-- ei täysin toimiva, omaksi ilokseni koittelen
+		 että minkälainen pitäisi olla, että saisin luotua vielä
+		  sivut jolle käyttäjän varaamat liput näkyisi. -->
+		<tr th:each="lippu : ${liput}">
+			<td th:text="${lippu.tapahtuma}"></td>
+			<td th:text="${lippu.lippuTyyppi}"></td>
+			<td th:text="${lippu.hinta}"></td>
+			<td><a th:href="@{/../tapahtumalista}" class="btn btn-success">Tapahtumien tiedot</a>
+		</tr>
+	</table>
+	<div><a th:href="@{/../tapahtumalista}" class="btn btn-success">Takaisin</a></div>
+	</div>
+</body>
+</html>
