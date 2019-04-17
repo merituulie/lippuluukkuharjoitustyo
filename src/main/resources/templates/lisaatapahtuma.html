@@ -24,7 +24,7 @@
 			  	<label for="tapahtumaPvm">Päivämäärä (pp.kk.vvv): </label>
 				<input type="text" id="tapahtumaPvm" th:field="*{tapahtumaPvm}" class="form-control"/>
 				
-					<span th:if="${pvmerror} == 1">Päivämääräässä virhe! Syötä muodossa pp.kk.vvv</span>
+					<span th:if="${pvmerror} == 1">Päivämäärässä virhe! Syötä muodossa pp.kk.vvv</span>
 				<div style="clear: both; display: block; height: 10px;"></div>
 			  	<label for="tapahtumaAika">Alkamisaika (tt:mm): </label>
 				<input type="text" th:field="*{tapahtumaAika}" class="form-control"/>
