@@ -27,7 +27,7 @@ import swd20.lippuluukku.domain.TapahtumaRepository;
 
 @Controller
 public class LippuluukkuController {
-	
+	// Principal principal -> tietää käyttäjän
 	@Autowired
 	private TapahtumaRepository tapahtumarepository;
 	

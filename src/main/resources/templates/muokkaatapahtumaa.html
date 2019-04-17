@@ -22,7 +22,9 @@
 	<div th:if="${param.error}">
 		Tapahtuman muokkaaminen epäonnistui.
 	</div>
+	<div class="pl-3" style="background-color:lightgrey">
 	<h5 class="pl-3 pb-3" th:text="'Muuta tapahtuman tietoja'"></h5>
+	</div>
 		<div sec:authorize="hasAuthority('TUOTTAJA')" class="table table-striped">
 				<label class="pl-4" for="status">Status: </label>
 					<a class="btn btn-primary" th:href="@{/julkaisetapahtuma/{id} (id=${tapahtumaId})}">Julkaistu</a>

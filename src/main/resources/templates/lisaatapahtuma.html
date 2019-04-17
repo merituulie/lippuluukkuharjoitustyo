@@ -12,7 +12,9 @@
 	<div th:if="${param.error}">
 		Tapahtuman luominen epäonnistui.
 	</div>
+	<div class="pt-3 pb-3" style="background-color:lightgrey">
 	<h5 class="pl-3">Lisää tapahtuman tiedot</h5>
+	</div>
 	<div>
 		<div sec:authorize="hasAuthority('TUOTTAJA')"  class="col-md-3">
 			<form th:object="${tapahtuma}" th:action="@{tallennatapahtuma}" action="#" method="post" id="lisaalomake">

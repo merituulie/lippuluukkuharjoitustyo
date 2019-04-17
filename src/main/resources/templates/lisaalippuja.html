@@ -22,12 +22,15 @@
 <title>Luo lippuja</title>
 </head>
 <body>
+	<div class="pt-3 pb-3 pr-3" style="background-color:lightgrey">
 	<div th:if="${param.error}">
 		Lippujen lisääminen epäonnistui.
 	</div>
 	<h5 class="pl-3 pb-3" th:text="'Lisää tapahtumaan ' + *{tapahtuma.tapahtumaNimi} + ' lippuja'"></h5>
+	</div>
 	<div sec:authorize="hasAuthority('TUOTTAJA')">
-		<div class="col-md-4">
+	<div class="container-fluid">
+		<div class="text-center col-md-4">
 			<form th:object="${lippu}" th:action="@{../tallennalippuja}" action="#" method="post">
 				<label for="hinta">Lipun hinta (ee,ss): </label> <input type="number" id="hinta" th:field="*{hinta}" class="form-control"/>
 						<span th:if="${#fields.hasErrors('hinta')}" th:errors="*{hinta}">Hinnassa virhe.</span>
@@ -50,7 +53,8 @@
 				</div>
 			</form>
 			<a th:href="@{/../tapahtumalista}" class="btn btn-primary">Takaisin</a>
-		</div>
+	</div>
+	</div>
 	</div>
 	<script>
 	$(document).ready(function(){

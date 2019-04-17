@@ -10,15 +10,13 @@
 <title>Tapahtumat</title>
 </head>
 <body>
+	<div class="pt-3 pb-3 text-center" style="background-color:lightgrey">
 	<h5 class="pl-4" th:inline="text">Hei [[${#httpServletRequest.remoteUser}]]!</h5>
 	<div class="header-left pl-4">
-	<a sec:authorize="hasAuthority('ASIAKAS')" th:href="@{../omatliput}" class="btn btn-success">Omat liput</a>
-		<form class="pr-4 text-right" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-			<input type="submit" value="Kirjaudu ulos" class="btn btn-danger" />
-		</form>
 		<a href="/login" sec:authorize="isAnonymous()" class="btn btn-success">Kirjaudu</a>
 	</div>
 	<h5 class="text-center">Kaikki tapahtumat</h5>
+	</div>
 	<div class="container-fluid">
 	<table class="table table-striped">
 		<tr>
@@ -60,9 +58,14 @@
 		</tr>
 	</table>
 	</div>
-	<div class="pl-3">
-	<a sec:authorize="hasAuthority('TUOTTAJA')" class="btn btn-success"
-		href="/lisaatapahtuma">Lisää uusi tapahtuma</a>
+	<div class="text-center pt-3 pb-3" style="background-color:lightgrey">
+		<a sec:authorize="hasAuthority('TUOTTAJA')" class="btn btn-success" href="/lisaatapahtuma">Lisää uusi tapahtuma</a>
+		<div class="pr-4">
+			<a sec:authorize="hasAuthority('ASIAKAS')" th:href="@{../omatliput}" class="btn btn-success">Omat liput</a>
+		</div>
+		<form class="pr-4 pt-3" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-danger" />
+		</form>
 	</div>
 </body>
 </html>
