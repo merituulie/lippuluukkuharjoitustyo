@@ -17,29 +17,29 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 </head>
-<body>
+<body style="background-image:url('../css/concert-2527495.jpg'); color:#fff">
 <div class="text-center">
 	<div th:if="${param.error}">
 		Tapahtuman muokkaaminen epäonnistui.
 	</div>
-	<div class="pl-3" style="background-color:lightgrey">
+	<div class="pl-3">
 	<h5 class="pl-3 pb-3" th:text="'Muuta tapahtuman tietoja'"></h5>
 	</div>
 		<div sec:authorize="hasAuthority('TUOTTAJA')" class="table table-striped">
-				<label class="pl-4" for="status">Status: </label>
+				<label style="color:#fff" class="pl-4" for="status">Status: </label>
 					<a class="btn btn-primary" th:href="@{/julkaisetapahtuma/{id} (id=${tapahtumaId})}">Julkaistu</a>
 					<a class="btn btn-danger" th:href="@{/perutapahtuma/{id} (id=${tapahtumaId})}">Peruttu</a>
 					
 				<div style="clear: both; display: block; height: 10px;"></div>
 				<form th:object="${tapahtuma1}" th:action="@{../tallennavanhatapahtuma}" action="#" method="post">
 					<input type="hidden" th:field="*{tapahtumaId}" class="form-control" />
-					<label class="pl-5" for="tapahtumaNimi">Nimi: </label> <input type="text" id="tapahtumaNimi" th:field="${tapahtuma1.tapahtumaNimi}" />
+					<label style="color:#fff"  class="pl-5" for="tapahtumaNimi">Nimi: </label> <input type="text" id="tapahtumaNimi" th:field="${tapahtuma1.tapahtumaNimi}" />
 					
 					<div style="clear: both; display: block; height: 10px;"></div>
-					<label for="tapahtumaPvm">Päivämäärä: </label> <input type="text" id="tapahtumaPvm" th:field="*{tapahtumaPvm}" />
+					<label style="color:#fff" for="tapahtumaPvm">Päivämäärä: </label> <input type="text" id="tapahtumaPvm" th:field="*{tapahtumaPvm}" />
 					
 					<div style="clear: both; display: block; height: 10px;"></div>
-					<label for="tapahtumaAika">Alkamisaika: </label> <input type="text" th:field="*{tapahtumaAika}" />
+					<label style="color:#fff" for="tapahtumaAika">Alkamisaika: </label> <input type="text" th:field="*{tapahtumaAika}" />
 					
 					<div style="clear: both; display: block; height: 10px;"></div>
 					<input class="btn btn-success" type="submit" value="Vahvista"></input>

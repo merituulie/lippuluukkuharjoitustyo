@@ -175,14 +175,11 @@ public class LippuluukkuController {
 			return "redirect:../../tapahtumalista";
 	 }
 	 
-	 @RequestMapping(value="/omatliput") // ei täysin toimiva, omaksi ilokseni koittelen että minkälainen metodi pitäisi olla, että saisin luotua vielä sivut jolle käyttäjän varaamat liput näkyisi.
+	@GetMapping(value="/omatliput") // ei täysin toimiva, omaksi ilokseni koittelen että minkälainen metodi pitäisi olla, että saisin luotua vielä sivut jolle käyttäjän varaamat liput näkyisi.
 	 public String tapahtumaLista(@AuthenticationPrincipal UserDetails currentUser, Model model) {
 		 Kayttaja kayttaja = kayttajarepository.findByKayttajaNimi(currentUser.getUsername());
-		 List <Lippu> liput = new ArrayList<Lippu>();
-		 for(Lippu lippu: kayttaja.getLiput()) {
-		 liput.add(lippu);
-		 }
+		 List <Lippu> liput = kayttaja.getLiput();
 		 model.addAttribute("liput", liput);
-		 return "tapahtumalista";
+		 return "omatliput";
 	 }
 }

@@ -9,7 +9,7 @@
 
 <title>Omat liput</title>
 </head>
-<body>
+<body style="color:#fff">
 	<h3>Omat lippusi</h3>
 	<div sec:authorize="isAuthenticated()" class="col-md-4"
 		style="padding: 20px 0">
@@ -34,7 +34,8 @@
 			<td><a th:href="@{/../tapahtumalista}" class="btn btn-success">Tapahtumien tiedot</a>
 		</tr>
 	</table>
-	<div><a th:href="@{/../tapahtumalista}" class="btn btn-success">Takaisin</a></div>
-	</div>
+	<div class="text-center">
+		<a th:href="@{/../tapahtumalista}" class="btn btn-success">Takaisin</a></div>
+	</div> 	
 </body>
 </html>

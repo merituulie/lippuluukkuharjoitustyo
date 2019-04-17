@@ -4,21 +4,30 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 " />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{css/bootstrap.min.css}" />
-
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 <title>Tapahtumat</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 </head>
-<body>
-	<div class="pt-3 pb-3 text-center" style="background-color:lightgrey">
+<body style="color:#fff">
+	<div class="pt-3 pb-3 text-center">
 	<h5 class="pl-4" th:inline="text">Hei [[${#httpServletRequest.remoteUser}]]!</h5>
-	<div class="header-left pl-4">
 		<a href="/login" sec:authorize="isAnonymous()" class="btn btn-success">Kirjaudu</a>
-	</div>
+	<span>Etsi tapahtumaa: </span><input id="myInput" type="text" placeholder="Etsi..">
+	<br><br>
 	<h5 class="text-center">Kaikki tapahtumat</h5>
 	</div>
-	<div class="container-fluid">
-	<table class="table table-striped">
+	<div>
+	<table class="table table-striped table-hover">
 		<tr>
 			<th>Tapahtuma</th>
 			<th>Päivämäärä</th>
@@ -28,7 +37,9 @@
 			<th></th>
 			<th></th>
 			<th></th>
+			<th></th>
 		</tr>
+		<tbody id="myTable">
 		<tr th:each="tapahtuma : ${tapahtumat}">
 			<td th:text="${tapahtuma.tapahtumaNimi}"></td>
 			<td th:text="${tapahtuma.tapahtumaPvm}"></td>
@@ -55,10 +66,13 @@
 				class="btn btn-danger"
 				th:href="@{/poistatapahtuma/{tapahtumaId}(tapahtumaId=${tapahtuma.tapahtumaId})}">Poista</a></td>
 			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
+		</tbody>
 	</table>
 	</div>
-	<div class="text-center pt-3 pb-3" style="background-color:lightgrey">
+	<div class="text-center pt-3 pb-3">
 		<a sec:authorize="hasAuthority('TUOTTAJA')" class="btn btn-success" href="/lisaatapahtuma">Lisää uusi tapahtuma</a>
 		<div class="pr-4">
 			<a sec:authorize="hasAuthority('ASIAKAS')" th:href="@{../omatliput}" class="btn btn-success">Omat liput</a>

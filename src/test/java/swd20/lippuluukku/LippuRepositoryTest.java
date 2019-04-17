@@ -19,48 +19,10 @@ import swd20.lippuluukku.domain.TapahtumaRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class LippuluukkuRepositoryTest {
-	
-	@Autowired
-	private TapahtumaRepository tapahtumarepository;
+public class LippuRepositoryTest {
 	
 	@Autowired
 	private LippuRepository lippurepository;
-	
-	@Autowired
-	private LipputyyppiRepository lipputyyppirepository;
-	
-	@Test
-	public void lipputyyppirepositoryToimii() {
-		Lipputyyppi lipputyyppi1 = new Lipputyyppi("VIP");
-		lipputyyppirepository.save(lipputyyppi1);
-		
-		assertThat(lippurepository).isNotNull();
-	}
-	
-	@Test
-	public void lipputyyppirepositoryLoytaaNimen() {
-		Lipputyyppi lipputyyppi1 = new Lipputyyppi("VIP");
-		lipputyyppirepository.save(lipputyyppi1);
-		
-		assertThat(lipputyyppirepository.findByLipputyyppiNimi("VIP")).contains(lipputyyppi1);
-	}
-	
-	@Test
-	public void tapahtumarepositoryToimii() {
-		Tapahtuma tapahtuma1 = new Tapahtuma("Ruisrock", "30.6.2019", "18:00");
-		tapahtumarepository.save(tapahtuma1);
-		
-		assertThat(tapahtumarepository).isNotNull();
-	}
-	
-	@Test
-	public void tapahtumarepositoryLoytaaTapahtuman() {
-		Tapahtuma tapahtuma1 = new Tapahtuma("Ruisrock", "30.6.2019", "18:00");
-		tapahtumarepository.save(tapahtuma1);
-		
-		assertThat(tapahtumarepository.findByTapahtumaNimi("Ruisrock").contains(tapahtuma1));
-	}
 	
 	@Test
 	public void lippurepositoryToimii() {
