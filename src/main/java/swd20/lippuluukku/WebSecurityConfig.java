@@ -31,11 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http // määritelmät eri käyttäjien oikeuksille nähdä ja käyttää sivuja.
-		.authorizeRequests().antMatchers("css/**", "lippuluukku").permitAll()
+		http // määritelmät eri käyttäjien oikeuksille nähdä ja käyttää sivuja, restmetodeille myös annettu tuo permitAll-lupa!
+		.authorizeRequests().antMatchers("css/**", "lippuluukku", "/liput", "/tapahtumat", "/lipputyypit").permitAll()
           .and()
           .authorizeRequests().antMatchers("/", "lisaapatahtuma", "tallennatapahtuma", "muokkaatapahtumaa/*", "julkaisetapahtuma/*",
-        		  "perutapahtuma/*", "lisaalippuja/*", "tallennalippuja").hasAuthority("TUOTTAJA")
+        		  "perutapahtuma/*", "lisaalippuja/*", "tallennalippuja", "liput/*", "tapahtumat/*", "lipputyypit/*").hasAuthority("TUOTTAJA")
           .and()
           .authorizeRequests().antMatchers("tapahtumalista").authenticated()
           .and()

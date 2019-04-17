@@ -34,8 +34,17 @@ public class LippuluukkuApplication {
 			
 			Tapahtuma tapahtuma1 = new Tapahtuma("Ruisrock", "30.6.2019", "18:00");
 			Tapahtuma tapahtuma2 = new Tapahtuma("Inna", "15.7.2019", "18:30");
+			Tapahtuma tapahtuma3 = new Tapahtuma("Weekend Festival", "1.8.2019", "19:00");
+			Tapahtuma tapahtuma4 = new Tapahtuma("The Circus Presents: Björk", "30.6.2019", "18:00");
+			Tapahtuma tapahtuma5 = new Tapahtuma("AllIn: Urban Music Festival", "20.9.2019", "17:30");
+			Tapahtuma tapahtuma6 = new Tapahtuma("Loop Presents: Twerk SM", "20.5.2019", "21:00");
+			
 			tapahtumarepository.save(tapahtuma1);
 			tapahtumarepository.save(tapahtuma2);
+			tapahtumarepository.save(tapahtuma3);
+			tapahtumarepository.save(tapahtuma4);
+			tapahtumarepository.save(tapahtuma5);
+			tapahtumarepository.save(tapahtuma6);
 			
 			lippurepository.save(new Lippu(lipputyyppi1, tapahtuma1, 120.00, "Vapaa"));
 			lippurepository.save(new Lippu(lipputyyppi2, tapahtuma2, 90.00, "Vapaa"));

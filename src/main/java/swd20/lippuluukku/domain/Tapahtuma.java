@@ -25,7 +25,7 @@ public class Tapahtuma {
 	private List<Lippu> liput;
 	
 	@Size(min = 2, message = "Nimen on oltava vähintään 2 merkkiä pitkä.")
-	@Size(max = 20, message = "Nimi voi olla enintään 20 merkkiä pitkä.")
+	@Size(max = 50, message = "Nimi voi olla enintään 50 merkkiä pitkä.")
 	@Column(name = "tapahtumaNimi")
 	private String tapahtumaNimi;
 	

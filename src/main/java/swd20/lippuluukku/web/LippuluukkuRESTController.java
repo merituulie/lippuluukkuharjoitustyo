@@ -33,7 +33,7 @@ public class LippuluukkuRESTController {
 		return (List<Lippu>) lippurepository.findAll();
 	}
 	
-	@GetMapping(value="/tapahtumatt") // Kaikki tapahtumat - REST metodina
+	@GetMapping(value="/tapahtumat") // Kaikki tapahtumat - REST metodina
 		public @ResponseBody List<Tapahtuma> tapahtumaListaRest() {
 		return (List<Tapahtuma>) tapahtumarepository.findAll();
 	}
@@ -48,7 +48,7 @@ public class LippuluukkuRESTController {
 		return lippurepository.findById(lippuId);
 	}
 	
-	@GetMapping(value="/tapahtumatt/{id}") // Yksi tapahtuma id:llä REST
+	@GetMapping(value="/tapahtumat/{id}") // Yksi tapahtuma id:llä REST
 		public @ResponseBody Optional<Tapahtuma> findTapahtumaRest(@PathVariable("id") Long tapahtumaId) {
 		return tapahtumarepository.findById(tapahtumaId);
 	}
